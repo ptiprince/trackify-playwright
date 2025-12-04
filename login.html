@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Trackify</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+    <form>
+        <input type="email" placeholder="Email" required />
+        <button type="button">Next</button><br><br>
+
+        <input type="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+    </form>
+
+    <p id="error" style="color:red; display:none;">Incorrect email or password</p>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.querySelector('input[placeholder="Email"]').value;
+            const password = document.querySelector('input[placeholder="Password"]').value;
+            const error = document.getElementById('error');
+
+            if (email !== 'admin@admin.com' || password !== 'admin123') {
+                error.style.display = 'block';
+                document.cookie = "token=; Max-Age=0; path=/; SameSite=None";
+            } else {
+                error.style.display = 'none';
+                document.cookie = "token=validtoken; Max-Age=3600; path=/";
+
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 100);
+            }
+        });
+    </script>
+</body>
+
+</html>
